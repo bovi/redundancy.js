@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Redudnancy.js</title>
+<script type="text/javascript">
+  function receiveData(url) {
+    var request = new XMLHttpRequest();
+    var requestURL = url;
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+      var serverData = request.response;
+      var head = document.createElement('h1');
+      head.textContent = serverData['key'];
+      document.body.appendChild(head);
+      var p = document.createElement('p');
+      p.textContent = 'provided by: ' + serverData['hostid'];
+      document.body.appendChild(p);
+    }
+  }
+
+  function initSystem() {
+    receiveData('http://127.0.0.1:3001');
+    receiveData('http://127.0.0.1:3002');
+  }
+
+  window.onload = initSystem;
+</script>
+</head>
+<body>
+</body>
+</html>
